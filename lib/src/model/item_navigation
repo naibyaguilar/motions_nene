@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+
+class OptionNavigations {
+  final String route, title;
+  final IconData icon;
+  final Widget screen;
+
+  OptionNavigations({
+    required this.title,
+    required this.route,
+    required this.screen,
+    required this.icon
+  });
+}
