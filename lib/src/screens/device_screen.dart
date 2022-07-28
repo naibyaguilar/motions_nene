@@ -5,60 +5,59 @@ import '../routes/app_routes.dart';
 import '../widgets/bottom_navigation.dart';
 
 class DeviceScreen extends StatelessWidget {
-  DeviceScreen({Key? key}) : super(key: key);
+  DeviceScreen({Key? key, required this.names}) : super(key: key);
   final TextEditingController controller = TextEditingController();
-
+  final List<Map> names;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Administrador de dispositivos"),
-      ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children:[
-            Container(
-            margin: const EdgeInsets.only(top: 10),
-            height: 200,
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    height: 120,
-                    child: Image.asset("assets/images/logo/logo_mosnter.png"),
-                  ),
-                  SizedBox(
-                    height: 120,
-                    child: Image.asset(
-                      "assets/images/logo/logo_mosnter.png",
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(20, 40, 20, 20),
-            child: TextField(
-              controller: controller,
-              decoration: const InputDecoration(hintText: 'Name'),
-            ),
-          ),
-           ElevatedButton(
-             child: const Text('Submit'),
-             onPressed: () async {
-               SharedPreferences prefs = await SharedPreferences.getInstance();
-               prefs.setString('name', controller.text.trim());
-               if (controller.text.isNotEmpty) {}
-             },
-           )
+          title: const Text("Administrador de dispositivos"),
+          backgroundColor: const Color(0xFF644394)),
+      body: (_listViewDevice(names: names)),
+      bottomNavigationBar: BottomNavigation(items: AppRoute.listSreens),
+    );
+  }
+}
 
-          ],
-        ),
-        bottomNavigationBar: BottomNavigation(items : AppRoute.listSreens),
-      );   
+class _listViewDevice extends StatelessWidget {
+  const _listViewDevice({
+    Key? key,
+    required this.names,
+  }) : super(key: key);
+
+  final List<Map> names;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: names.length,
+      itemBuilder: (context, i) {
+        return Card(
+            color: const Color(0xFFD9EEF6),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                    width: 70,
+                    height: 70,
+                    margin: const EdgeInsets.only(right: 15),
+                    child: Image(image: AssetImage(names[i]['image']))),
+                const SizedBox(
+                  width: 6,
+                ),
+                Text(
+                  names[i]['name'],
+                  style: const TextStyle(
+                    color: Color(0xFF644394),
+                    fontSize: 30.0,
+                    height: 1.6,
+                  ),
+                ),
+              ],
+            ));
+      },
+    );
   }
 }

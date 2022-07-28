@@ -27,7 +27,6 @@ class BottomNavigation extends StatelessWidget {
 class ButtonNavigation extends StatelessWidget {
   final OptionNavigations option;
   const ButtonNavigation({Key? key, required this.option}) : super(key: key);
-  
 
   @override
   Widget build(BuildContext context) {
@@ -35,19 +34,24 @@ class ButtonNavigation extends StatelessWidget {
       padding: EdgeInsets.zero,
       child: CupertinoButton(
         pressedOpacity: 1.0,
-          onPressed: () =>
-              Navigator.pushReplacementNamed(context, option.route),
-          child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(option.icon, color:  const Color(0XFF9D4BFA),),
-            const SizedBox(height: 5,),
-            Text(option.title,
-              style: const TextStyle(color: Color(0XFF9D4BFA), fontSize: 12),
-            )
-          ]),
-          ),
+        onPressed: () => Navigator.pushReplacementNamed(context, option.route),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Icon(
+                option.icon,
+                color: const Color(0xFF644394),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                option.title,
+                style: const TextStyle(color: Color(0xFF644394), fontSize: 12),
+              )
+            ]),
+      ),
     );
   }
 }

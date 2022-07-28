@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "783894820741",
+    "firebase_url": "https://nenemotions-default-rtdb.firebaseio.com",
+    "project_id": "nenemotions",
+    "storage_bucket": "nenemotions.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783894820741:android:fb7c135844d07fdf8176ec",
+        "android_client_info": {
+          "package_name": "com.example.motion_nene"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783894820741-48ssp7qvnab6u0920is8s2o6ep9vs1cv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy2CcplRv501JPcpIXh5p8zaVd3ATfPLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783894820741-48ssp7qvnab6u0920is8s2o6ep9vs1cv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -39,6 +39,8 @@ dependencies:
   http: ^0.13.4
   shared_preferences: ^2.0.15
   charts_flutter: ^0.12.0
+  firebase_core: ^1.20.0
+  firebase_analytics: ^9.3.0
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +70,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/slider/
-    - assets/images/splash/
+    - assets/images/device/
     - assets/images/logo/    
     - assets/fonts/
 
@@ -83,21 +85,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   fonts:
-    - family: ComicSans
-      fonts:
-        - asset: assets/fonts/ComicNeueSansID.ttf
-          weight: 700 
-    - family: Hunters
-      fonts:
-        - asset: assets/fonts/Hunters.otf
-          weight: 700
+    - family: Avert
+      fonts:      
+        - asset: assets/fonts/AvertaDemoPE-Regular.otf
+        - asset: assets/fonts/AvertaDemoPE-ExtraboldItalic.otf
+          style: italic 
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 
-flutter_native_splash:
-  background_image: "assets/images/logo/logo_mosnter.png"
-  android: true
-  ios: true
-  fullscreen: true
 

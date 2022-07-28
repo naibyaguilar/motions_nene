@@ -19,11 +19,10 @@ class _PinChartState extends State<PinChart> {
   Widget build(BuildContext context) {
     List<charts.Series<Device, String>> series = [
       charts.Series(
-        id: "developers",
-        data: widget.data,
-        domainFn: (Device series, _) => series.name,
-        measureFn: (Device series, _) => series.value
-      ),
+          id: "developers",
+          data: widget.data,
+          domainFn: (Device series, _) => series.name,
+          measureFn: (Device series, _) => series.value),
     ];
 
     return Container(
@@ -41,12 +40,11 @@ class _PinChartState extends State<PinChart> {
               ),
               Switch(
                 onChanged: (value) {
-              setState(
-                () {
-                  ledOn = !ledOn;
-                },
-              );
-              API.toggleLED(value);
+                  setState(
+                    () {
+                      ledOn = !ledOn;
+                    },
+                  );
                 },
                 value: ledOn,
                 activeColor: Colors.cyan,

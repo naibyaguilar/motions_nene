@@ -3,27 +3,62 @@ import 'package:flutter/material.dart';
 import '../routes/app_routes.dart';
 import '../widgets/bottom_navigation.dart';
 
-class SettingsScreen extends StatefulWidget {
+class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
 
   @override
-  State<SettingsScreen> createState() => _SettingsScreenState();
-}
-
-class _SettingsScreenState extends State<SettingsScreen> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            FlutterLogo(size: 300,),
-            SizedBox(height: 5,),
-            Text('Setting Screen ....'),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: ListView(padding: const EdgeInsets.all(0.0), children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 40, left: 20, bottom: 12),
+                child: Text(
+                  "Settings",
+                  style: TextStyle(fontSize: 26),
+                ),
+              ),
+              ListTile(
+                title: const Text("Próximamente: Cambiar número"),
+                leading: const Icon(
+                  Icons.phone,
+                  size: 18,
+                  color: Color(0xff0785CC),
+                ),
+                onTap: () {
+                  print("tapped");
+                },
+              ),
+              ListTile(
+                title: const Text("Próximamente: Gestionar los sonidos"),
+                leading: const Icon(
+                  Icons.hearing,
+                  size: 18,
+                  color: Color(0xff872EF9),
+                ),
+                onTap: () {
+                  print("tapped");
+                },
+              ),
+              ListTile(
+                title: const Text("Próximamente: Iniciar sesión"),
+                leading: const Icon(
+                  Icons.phone,
+                  size: 18,
+                  color: Color(0xffEB2B2B),
+                ),
+                onTap: () {
+                  print("Logout");
+                },
+              ),
+            ]),
+          ),
         ),
-        bottomNavigationBar: BottomNavigation(items : AppRoute.listSreens),
-      );    
+      ),
+      bottomNavigationBar: BottomNavigation(items: AppRoute.listSreens),
+    );
   }
 }
