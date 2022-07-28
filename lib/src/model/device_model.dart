@@ -1,5 +1,13 @@
 import '../services/api.dart';
 
+class DeviceTest {
+  Lectura lectura;
+
+  DeviceTest({required this.lectura});
+}
+
+class Lectura {}
+
 class Device {
   int value;
   String name;
@@ -21,7 +29,7 @@ class Device {
   }
 
   factory Device.fromJson(Map<String, dynamic> json) => Device(
-        value: json["status"],
+        value: json["Lectura"],
         name: json["Lectura"],
         //articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
       );

@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_nene/src/routes/app_routes.dart';
 //import 'package:motion_nene/src/widgets/intro_slider.dart';
@@ -6,12 +7,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'src/screens/alert_screen.dart';
-import 'src/widgets/intro_slider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  //print('Initialized default app $app');
+  FirebaseApp app = await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform);
+
+  print('Initialized default app $app');
   runApp(const MyApp());
 }
 

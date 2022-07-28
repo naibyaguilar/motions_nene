@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:motion_nene/src/widgets/bottom_navigation.dart';
 import 'package:provider/provider.dart';
@@ -9,12 +12,54 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getDataTest();
     return ChangeNotifierProvider(
       create: (_) => AlertDeviceModel(),
       child: const Pagehome(),
     );
     //Pagehome();
   }
+}
+
+void getData() {
+  final database = FirebaseDatabase.instance.reference();
+  database.once().then((event) {
+    final dataSnapshot = event.snapshot;
+    if (dataSnapshot!.value != null) {
+      dataSnapshot.children.forEach((element) {
+        String jsonString = json.encode(element.value);
+        final list =
+            jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
+        print(list.last);
+      });
+    }
+  });
+}
+
+void getDataTest() {
+  DatabaseReference keyRef = FirebaseDatabase.instance.reference();
+  keyRef.orderByChild('timestamp').onChildAdded.listen((event) {
+    final element = event.snapshot.value;
+    String jsonString = json.encode(element);
+    print(jsonString);
+    final list = jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
+    list
+      ..forEach((element) {
+        print(element);
+      });
+    final lastItem = list.first;
+    final number = strstr(lastItem, ":");
+    print(number);
+  }, onError: (Object o) {
+    print(o);
+  });
+}
+
+String? strstr(String myString, String pattern, {bool before = false}) {
+  var index = myString.indexOf(pattern);
+  if (index < 0) return null;
+  if (before) return myString.substring(0, index);
+  return myString.substring(index + pattern.length);
 }
 
 class Pagehome extends StatelessWidget {
