@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:motion_nene/src/screens/alert_screen.dart';
 import 'package:motion_nene/src/widgets/bottom_navigation.dart';
+import 'package:provider/provider.dart';
+import '../../main.dart';
 import '../routes/app_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => AlertDeviceModel(),
+      child: const Pagehome(),
+    );
+    //Pagehome();
+  }
+}
+
+class Pagehome extends StatelessWidget {
+  const Pagehome({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +66,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () => _displayDialog(context),
+              onPressed: () => displayDialog(context),
               //Navigator.pushReplacementNamed(context, '/device'),
               style: TextButton.styleFrom(
                   backgroundColor: const Color(0XFF16A596), //16A596
@@ -66,24 +82,5 @@ class HomeScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigation(items: AppRoute.listSreens),
     );
-  }
-
-  _displayDialog(BuildContext context) {
-    showGeneralDialog(
-        context: context,
-        barrierDismissible: false,
-        transitionDuration: const Duration(milliseconds: 2000),
-        transitionBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: ScaleTransition(
-              scale: animation,
-              child: child,
-            ),
-          );
-        },
-        pageBuilder: (context, animation, secondaryAnimation) {
-          return const AlertScreen();
-        });
   }
 }

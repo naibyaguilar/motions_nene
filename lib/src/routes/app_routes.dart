@@ -23,7 +23,7 @@ class AppRoute {
     OptionNavigations(
         title: 'Configuración',
         route: '/settings',
-        screen: SettingsScreen(),
+        screen: const SettingsScreen(),
         icon: Icons.settings_applications_sharp),
   ];
 
@@ -41,5 +41,3 @@ List<Map> names = [
   {"name": "Area de jugos", "value": 0, "image": 'assets/images/device/6.png'},
   {"name": "Detector Movil", "value": 0, "image": 'assets/images/device/7.png'}
 ];
-
-//["Detector Cuna", "Area de jugos", "Detector Movil"];

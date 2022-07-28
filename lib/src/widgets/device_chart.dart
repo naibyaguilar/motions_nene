@@ -1,7 +1,8 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:motion_nene/src/model/device_model.dart';
-import '../services/api.dart';
 
 class PinChart extends StatefulWidget {
   final List<Device> data;

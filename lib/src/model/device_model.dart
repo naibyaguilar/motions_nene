@@ -1,16 +1,5 @@
 import '../services/api.dart';
 
-class Devices {
-  // List<Device> items = [];
-  Devices();
-
-  final items = List<Device>.generate(
-      10,
-      (i) => i % 6 == 0
-          ? Device(name: 'Message body $i', value: i)
-          : Device(name: 'Message body $i', value: i));
-}
-
 class Device {
   int value;
   String name;
@@ -31,5 +20,9 @@ class Device {
     return pinDataList;
   }
 
-  List<String> names = ["Detector Cuna", "Area de jugos", "Detector Movil"];
+  factory Device.fromJson(Map<String, dynamic> json) => Device(
+        value: json["status"],
+        name: json["Lectura"],
+        //articles: List<Article>.from(json["articles"].map((x) => Article.fromJson(x))),
+      );
 }
