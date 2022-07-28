@@ -43,10 +43,9 @@ void getDataTest() {
     String jsonString = json.encode(element);
     print(jsonString);
     final list = jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
-    list
-      ..forEach((element) {
-        print(element);
-      });
+    list.forEach((element) {
+      print(element);
+    });
     final lastItem = list.first;
     final number = strstr(lastItem, ":");
     print(number);
