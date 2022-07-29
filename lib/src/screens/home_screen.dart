@@ -127,4 +127,74 @@ class Pagehome extends StatelessWidget {
       bottomNavigationBar: BottomNavigation(items: AppRoute.listSreens),
     );
   }
+
+  void getData(BuildContext context) {
+    final database = FirebaseDatabase.instance.reference();
+    // database.once().then((event) {
+    database.orderByChild('timestamp').onValue.listen((event) async {
+      final dataSnapshot = event.snapshot;
+      if (dataSnapshot.value != null) {
+        dataSnapshot.children.forEach((element) async {
+          String jsonString = json.encode(element.value);
+          final list =
+              jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
+          final lastItem = list.last;
+          final number = strstr(lastItem, ":");
+          print(dataSnapshot.value);
+          if (number != "0") {
+            print(number);
+            await displayDialog(context);
+          }
+        });
+      }
+    });
+  }
+
+  void getDataTest(BuildContext context) async {
+    DatabaseReference keyRef = FirebaseDatabase.instance.reference();
+    keyRef.orderByChild('timestamp').onChildAdded.listen((event) async {
+      final element = event.snapshot.value;
+      String jsonString = json.encode(element);
+      print(jsonString);
+      final list =
+          jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
+      list.forEach((element) {
+        // print(element);
+      });
+      final lastItem = list.last;
+      final number = strstr(lastItem, ":");
+      print(lastItem);
+      if (number != "0") {
+        await displayDialog(context);
+      }
+    }, onError: (Object o) {
+      //print(o);
+    });
+  }
+
+  String? strstr(String myString, String pattern, {bool before = false}) {
+    var index = myString.indexOf(pattern);
+    if (index < 0) return null;
+    if (before) return myString.substring(0, index);
+    return myString.substring(index + pattern.length);
+  }
+
+  Future<void> displayDialog(BuildContext context) async {
+    showGeneralDialog(
+        context: context,
+        barrierDismissible: false,
+        transitionDuration: const Duration(milliseconds: 2000),
+        transitionBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: ScaleTransition(
+              scale: animation,
+              child: child,
+            ),
+          );
+        },
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const AlertScreen();
+        });
+  }
 }
