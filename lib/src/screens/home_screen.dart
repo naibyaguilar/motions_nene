@@ -2,72 +2,18 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:motion_nene/src/widgets/bottom_navigation.dart';
-import 'package:provider/provider.dart';
-import '../../main.dart';
 import '../routes/app_routes.dart';
+import 'alert_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    getDataTest();
-    return ChangeNotifierProvider(
-      create: (_) => AlertDeviceModel(),
-      child: const Pagehome(),
-    );
-    //Pagehome();
-  }
-}
-
-void getData() {
-  final database = FirebaseDatabase.instance.reference();
-  database.once().then((event) {
-    final dataSnapshot = event.snapshot;
-    if (dataSnapshot!.value != null) {
-      dataSnapshot.children.forEach((element) {
-        String jsonString = json.encode(element.value);
-        final list =
-            jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
-        print(list.last);
-      });
-    }
-  });
-}
-
-void getDataTest() {
-  DatabaseReference keyRef = FirebaseDatabase.instance.reference();
-  keyRef.orderByChild('timestamp').onChildAdded.listen((event) {
-    final element = event.snapshot.value;
-    String jsonString = json.encode(element);
-    print(jsonString);
-    final list = jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
-    list.forEach((element) {
-      print(element);
-    });
-    final lastItem = list.first;
-    final number = strstr(lastItem, ":");
-    print(number);
-  }, onError: (Object o) {
-    print(o);
-  });
-}
-
-String? strstr(String myString, String pattern, {bool before = false}) {
-  var index = myString.indexOf(pattern);
-  if (index < 0) return null;
-  if (before) return myString.substring(0, index);
-  return myString.substring(index + pattern.length);
-}
-
-class Pagehome extends StatelessWidget {
-  const Pagehome({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+    //getDataTest(context);
+    getDataTest(context);
     return Scaffold(
       body: Container(
         //color: const Color(0xff30BAD6),
@@ -140,7 +86,7 @@ class Pagehome extends StatelessWidget {
               jsonString.replaceAll("{", "").replaceAll("}", "").split(",");
           final lastItem = list.last;
           final number = strstr(lastItem, ":");
-          print(dataSnapshot.value);
+          print(lastItem);
           if (number != "0") {
             print(number);
             await displayDialog(context);
@@ -165,7 +111,15 @@ class Pagehome extends StatelessWidget {
       final number = strstr(lastItem, ":");
       print(lastItem);
       if (number != "0") {
-        await displayDialog(context);
+        // await displayDialog(context);
+        Fluttertoast.showToast(
+            msg: number.toString(),
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0);
       }
     }, onError: (Object o) {
       //print(o);
